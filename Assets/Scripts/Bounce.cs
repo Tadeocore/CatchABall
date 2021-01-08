@@ -9,6 +9,7 @@ public class Bounce : MonoBehaviour
     public Rigidbody rb;
     public float speed = 5f;
     public float maxSpeed = 5f;
+    public float minSpeed = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +25,13 @@ public class Bounce : MonoBehaviour
             Debug.Log(rb.velocity);
 
         }
-        if (GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)
+        if (rb.velocity.magnitude > maxSpeed)
         {
-            GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, maxSpeed);
+            rb.velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, maxSpeed);
+        }
+        if (rb.velocity.magnitude < minSpeed)
+        {
+            rb.velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, minSpeed);
         }
     }
     void OnCollisionEnter(Collision other)
