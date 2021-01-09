@@ -42,6 +42,7 @@ public class TankController2P : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Instantiate(prefab, emitter.position, emitter.rotation);
+            Destroy(prefab, 5);
             rb.AddForce(transform.forward * -explo, ForceMode.Impulse);
         }
     }
