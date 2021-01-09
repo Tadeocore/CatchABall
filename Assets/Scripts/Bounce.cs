@@ -7,9 +7,9 @@ public class Bounce : MonoBehaviour
     Vector3 dir;
    
     public Rigidbody rb;
-    public float speed = 5f;
-    public float maxSpeed = 5f;
-    public float minSpeed = 5f;
+    public float speed = 30f;
+    public float maxSpeed = 30f;
+    public float minSpeed = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +19,10 @@ public class Bounce : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //rb.velocity = new Vector3(0,0,maxSpeed)*Time.deltaTime;
+
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+        
         if (Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(transform.forward * speed);
@@ -33,6 +37,7 @@ public class Bounce : MonoBehaviour
         {
             rb.velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, minSpeed);
         }
+        
     }
     void OnCollisionEnter(Collision other)
     {
